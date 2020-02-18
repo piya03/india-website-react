@@ -5,11 +5,22 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useLocation
 } from "react-router-dom";
 import "./App.css"
 import CountryDetails from "./CountryDetails"
-import Rivers from "./Rivers"
+import Languages from "./Languages"
+import { AppBar, Toolbar, Typography, CssBaseline, useScrollTrigger, Box, Container } from '@material-ui/core';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+
+
+// function makeStyles(obj) {
+//     return function() {
+
+//     }
+// }
 const useStyles = makeStyles({
   root: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -25,46 +36,93 @@ const useStyles = makeStyles({
   },
 });
 
+const useStylesAppBar = makeStyles({
+  root: {
+    backgroundColor: "pink",
+    height: "150px",
+    "display": "flex", "justifyContent": "center", "flexDirection": "row"
+  }
+})
+const useStylesToolBar = makeStyles({
+  root: {
+    "background": "#eee", "borderRadius": "5px", "margin": "0px auto",
+    "position": "absolute", "bottom": "5px",
+    "right": "5px", "left": "5px", "display": "grid", "gridTemplateColumns": "auto auto"
+  }
 
-function App() {
-  const classes = useStyles();
+})
+const useStylesContainerAppbar = makeStyles({
+  root: {
+    position: "relative"
+  }
+})
 
+
+function AppContainer() {
+  const classesAppBar = useStylesAppBar()
+  const classesToolbar = useStylesToolBar()
+  const classesContainer = useStylesContainerAppbar()
+  let location = useLocation();
+
+  console.log('location.pathname', location.pathname)
+  let title = ''
+  if(location.pathname === '/'){
+    title= 'India'
+  } 
+  if(location.pathname === '/languages') {
+    title = 'Languages of India'
+  }
   return (
-    <div className="App">
-      {/* <Button variant="contained" color="primary"
-          classes={{
-            root: classes.root, // class name, e.g. `classes-nesting-root-x`
-            label: classes.label, // class name, e.g. `classes-nesting-label-x`
-          }}
-          >
-      Hello World
-    </Button> */}
-    <Router>
-
-      <div className="container">
-        <h1>India</h1>
-        <nav className="main-nav">
-          <Link to="/">India</Link>
-          <Link to="/rivers">Rivers</Link>
-        </nav>
-
-      </div>
+    <AppBar classes={classesAppBar}>
+      <Container maxWidth="md" classes={classesContainer}>
+        <Typography variant="h2" color="inherit">
+        {title}
+      </Typography>
 
 
-      <Switch>
-      <Route path="/rivers">
-            <Rivers />
-          </Route>
-          <Route path="/">
-            <CountryDetails />
-          </Route>
-       
-         
+        <Toolbar classes={classesToolbar}>
+
+
+          <Link to="/" variant="h5" color="inherit">
+            <Typography variant="h5" color="inherit">India
+                   </Typography>
+          </Link>
+          <Link to="/languages" variant="h5" color="inherit">
+            <Typography variant="h5" color="inherit">
+
+              Languages
+                  </Typography>
+          </Link>
+
+
+        </Toolbar>
+      </Container>
+    </AppBar>
+
+  )
+}
+function App() {
+  // const classes = useStyles();
+
+  // useLocation()
+  return (
+    <div className="App" style={{ paddingTop: "140px" }}>
+
+      <Router>
+
+        <AppContainer></AppContainer>
+        <Switch>
+          <Route path="/languages" component ={Languages} /> 
+          <Route path="/"  component ={CountryDetails} />
         </Switch>
-        </Router>
+      </Router>
 
     </div>
   );
 }
 
 export default App;
+
+
+// background: antiquewhite;
+//     padding: 32px;
