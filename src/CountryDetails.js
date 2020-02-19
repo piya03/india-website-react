@@ -1,8 +1,6 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import Avatar from '@material-ui/core/Avatar';
 import { containerStyles } from './commonStyle'
 import Image from './Image'
 function CountryDetails() {
@@ -13,7 +11,7 @@ function CountryDetails() {
             <Typography align="center" component="div">
                 <div className="container">
                     <h1>India</h1>
-                    <div className="about-india" style={{"display":"flex","flexDirection":"column","alignItems":"center"}}>
+                    <div className="about-india" style={{ "display": "flex", "flexDirection": "column", "alignItems": "center" }}>
                         <p >
                             India is a vast South Asian country with diverse terrain –
                              from Himalayan peaks to Indian Ocean coastline – and history

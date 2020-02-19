@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   BrowserRouter as Router,
@@ -11,36 +10,16 @@ import {
 import "./App.css"
 import CountryDetails from "./CountryDetails"
 import Languages from "./Languages"
-import { AppBar, Toolbar, Typography, CssBaseline, useScrollTrigger, Box, Container } from '@material-ui/core';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import { AppBar, Toolbar, Typography, Container } from '@material-ui/core';
 
 
-// function makeStyles(obj) {
-//     return function() {
-
-//     }
-// }
-const useStyles = makeStyles({
-  root: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    borderRadius: 3,
-    border: 0,
-    color: 'white',
-    height: 48,
-    padding: '0 30px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-  },
-  label: {
-    textTransform: 'capitalize',
-  },
-});
 
 const useStylesAppBar = makeStyles({
   root: {
     backgroundColor: "pink",
     height: "150px",
-    "display": "flex", "justifyContent": "center", "flexDirection": "row"
+    "display": "flex", "justifyContent": "center", "flexDirection": "row",
+    position: "absolute"
   }
 })
 const useStylesToolBar = makeStyles({
@@ -64,37 +43,30 @@ function AppContainer() {
   const classesContainer = useStylesContainerAppbar()
   let location = useLocation();
 
-  console.log('location.pathname', location.pathname)
+  console.log('location.pathname', location)
   let title = ''
-  if(location.pathname === '/'){
-    title= 'India'
-  } 
-  if(location.pathname === '/languages') {
-    title = 'Languages of India'
+  if (location.pathname === '/') {
+    title = 'India'
+  }
+  if (location.pathname === '/languages') {
+    title = 'Languages'
   }
   return (
     <AppBar classes={classesAppBar}>
       <Container maxWidth="md" classes={classesContainer}>
-        <Typography variant="h2" color="inherit">
-        {title}
-      </Typography>
-
-
+        <Typography variant="h3" color="inherit">
+          {title}
+        </Typography>
         <Toolbar classes={classesToolbar}>
-
-
           <Link to="/" variant="h5" color="inherit">
             <Typography variant="h5" color="inherit">India
                    </Typography>
           </Link>
           <Link to="/languages" variant="h5" color="inherit">
             <Typography variant="h5" color="inherit">
-
               Languages
                   </Typography>
           </Link>
-
-
         </Toolbar>
       </Container>
     </AppBar>
@@ -102,18 +74,16 @@ function AppContainer() {
   )
 }
 function App() {
-  // const classes = useStyles();
 
-  // useLocation()
   return (
     <div className="App" style={{ paddingTop: "140px" }}>
 
       <Router>
-
-        <AppContainer></AppContainer>
+    
+        <AppContainer />
         <Switch>
-          <Route path="/languages" component ={Languages} /> 
-          <Route path="/"  component ={CountryDetails} />
+          <Route path="/languages" component={Languages} />
+          <Route path="/" component={CountryDetails} />
         </Switch>
       </Router>
 
